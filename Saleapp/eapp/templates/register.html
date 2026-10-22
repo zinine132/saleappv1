@@ -1,0 +1,22 @@
+{% extends 'layout/base.html' %}
+
+{% block content %}
+<h1 class="text-center text-success mt-2">ĐĂNG KÝ NGƯỜI DÙNG</h1>
+
+<from method ="post" action ="register">
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="username" placeholder="Ten Dang Ky" name="username">
+        <label for="username">Ten Dang Ky</label>
+    </div>
+    <div class="form-floating mb-3 mt-3">
+        <input type="password" class="form-control" id="password" placeholder="Mat Khau" name="password">
+        <label for="password">Mat Khau</label>
+    </div>
+    <div class="from-floating mb-3 mt-3">
+        <button class = "btn btn-success">Dang Ky</button>
+    </div>
+
+
+</from>
+
+{% endblock %}

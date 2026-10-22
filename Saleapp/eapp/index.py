@@ -5,16 +5,6 @@ app = Flask(__name__)
 @app.route('/')
 
 def index():
-    categorles = [{
-        'id': 1,
-        'name': 'Mobile'
-    },{
-        'id': 2,
-        'name': 'Tablet'
-    },{
-        'id': 3,
-        'name': 'Laptop'
-    }]
     products =[{
         "id": 1,
         "name": "iPhone 7 Plus",
@@ -98,7 +88,36 @@ def index():
         products = [p for p in products if p['category_id']==int(cate_id)]
 
 
-    return render_template('index.html', categorles=categorles, products=products)
+    return render_template('index.html', products=products)
+
+@app.route('/login')
+def login_view():
+    return render_template('login.html')
+
+@app.route('/register')
+def register_view():
+    return render_template('register.html')
+
+
+
+@app.context_processor
+def common_response():
+    categorles = [{
+            'id': 1,
+            'name': 'Mobile'
+        },{
+            'id': 2,
+            'name': 'Tablet'
+        },{
+            'id': 3,
+            'name': 'Laptop'
+        }]
+        
+    return{
+        'categorles': categorles
+    }
+        
+    
 
 if __name__ == '__main__':
     with app.app_context():

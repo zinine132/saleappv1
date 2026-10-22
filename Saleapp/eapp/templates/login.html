@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>ĐĂNG NHẬP NGƯỜI DÙNG</h1>
+{% extends 'layout/base.html' %}
 
-</body>
-</html>
+{% block content %}
+<h1 class="text-center text-success mt-2">ĐĂNG NHẬP NGƯỜI DÙNG</h1>
+
+<from method ="post" action ="login">
+    <div class="form-floating mb-3 mt-3">
+        <input type="text" class="form-control" id="username" placeholder="Ten Dang Nhap" name="username">
+        <label for="username">Ten Dang Nhap</label>
+    </div>
+    <div class="form-floating mb-3 mt-3">
+        <input type="password" class="form-control" id="password" placeholder="Mat Khau" name="password">
+        <label for="password">Mat Khau</label>
+    </div>
+    <div class="from-floating mb-3 mt-3">
+        <button class = "btn btn-success">Dang Nhap</button>
+    </div>
+
+
+</from>
+
+{% endblock %}
