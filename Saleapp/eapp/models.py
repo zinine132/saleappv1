@@ -1,14 +1,32 @@
-
-from  sqlalchemy import Column, String, Float, Integer, Text, ForeignKey
+from sqlalchemy import Column, String, Float, Integer, Text, ForeignKey, Enum
 from sqlalchemy.orm import relationship
+from eapp import db, app
+from enum import Enum as UserEnum
+from flask_login import UserMixin
 
 
-from eapp import db,app
+class UserRoleEnum(UserEnum):
+    ADMIN=1
+    USER=2
+
+class User(db.Model, UserMixin):
+    name = Column(String(50), nullable=False)
+    username = Column(String(50), nullable=False, unique=True)
+    password = Column(String(50), nullable=False)
+    avatar = Column(String(100))
+    user_role = Column(Enum(UserRoleEnum), default=UserRoleEnum.USER)
+
+    def __str__(self):
+        return self.name
+
 
 class Category(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(50), nullable=False, unique=True)
-    products = relationship('Product',backref='category', lazy=True)
+    products = relationship('Product', backref='category', lazy=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Product(db.Model):
@@ -19,11 +37,17 @@ class Product(db.Model):
     image = Column(String(100), nullable=True)
     category_id = Column(Integer, ForeignKey(Category.id), nullable=False)
 
+    def __str__(self):
+        return self.name
+
 
 if __name__ == '__main__':
     with app.app_context():
-        # db.create_all()
 
+        import hashlib
+
+        u = User(name='admin', username='admin', user_role=U
+                 password=str(hashlib.md5('123456'.encode('utf-8')).hexdigest()))
 
         # c1 = Category(name='Mobile')
         # c2 = Category(name='Tablet')
@@ -56,7 +80,7 @@ if __name__ == '__main__':
             "price": 24000000,
             "image":
                 "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647248722/r8sjly3st7estapvj19u.jpg",
-            "category_id": 3
+            "category_id": 1
         }, {
             "id": 1,
             "name": "iPhone 7 Plus",
@@ -80,7 +104,7 @@ if __name__ == '__main__':
             "price": 24000000,
             "image":
                 "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647248722/r8sjly3st7estapvj19u.jpg",
-            "category_id": 3
+            "category_id": 1
         }, {
             "id": 1,
             "name": "iPhone 7 Plus",
@@ -104,11 +128,12 @@ if __name__ == '__main__':
             "price": 24000000,
             "image":
                 "https://res.cloudinary.com/dxxwcby8l/image/upload/v1647248722/r8sjly3st7estapvj19u.jpg",
-            "category_id": 3
+            "category_id": 1
         }]
 
         for p in products:
-            p1 = Product(name=p['name'], description=p['description'], price=p['price'], image=p['image'], category_id=p['category_id'])
+            p1 = Product(name=p['name'], description=p['description'], price=p['price'],
+                         image=p['image'], category_id=p['category_id'])
             db.session.add(p1)
 
         db.session.commit()

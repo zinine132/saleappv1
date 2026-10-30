@@ -3,20 +3,17 @@
 {% block content %}
 <h1 class="text-center text-success mt-2">ĐĂNG NHẬP NGƯỜI DÙNG</h1>
 
-<from method ="post" action ="login">
+<form method="post" action="/login">
     <div class="form-floating mb-3 mt-3">
-        <input type="text" class="form-control" id="username" placeholder="Ten Dang Nhap" name="username">
-        <label for="username">Ten Dang Nhap</label>
+      <input type="text" class="form-control" id="username" placeholder="Tên đăng nhập" name="username" />
+      <label for="username">Tên đăng nhập</label>
+    </div>
+     <div class="form-floating mb-3 mt-3">
+      <input type="password" class="form-control" id="password" placeholder="Mật khẩu" name="password" />
+      <label for="password">Mật khẩu</label>
     </div>
     <div class="form-floating mb-3 mt-3">
-        <input type="password" class="form-control" id="password" placeholder="Mat Khau" name="password">
-        <label for="password">Mat Khau</label>
+        <button class="btn btn-success">Đăng nhập</button>
     </div>
-    <div class="from-floating mb-3 mt-3">
-        <button class = "btn btn-success">Dang Nhap</button>
-    </div>
-
-
-</from>
-
+</form>
 {% endblock %}
