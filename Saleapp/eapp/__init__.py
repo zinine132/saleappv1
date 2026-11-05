@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 app = Flask(__name__)
 app.secret_key = 'JKGHJHGHJG&*^*&*&^*^*^^FJHGJHOUT&*T^R*^FJHV'
@@ -8,3 +9,4 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = True
 app.config['PAGE_SIZE'] = 8
 
 db = SQLAlchemy(app=app)
+login = LoginManager(app=app)
